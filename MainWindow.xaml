@@ -1,0 +1,275 @@
+﻿<Window x:Class="calculater_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:calculater_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="350" MinHeight="500" MinWidth="350">
+    <DockPanel>
+
+        <Menu DockPanel.Dock="Top" Padding="5" Background="WhiteSmoke">
+            <MenuItem Header="선택">
+                <MenuItem Header="표준"/>
+                <MenuItem Header="공학용"/>
+                <MenuItem Header="프로그래머용"/>
+            </MenuItem>
+            <MenuItem Header="끝내기"  x:Name="MenuClose" Click="MenuClose_Click"/>
+        </Menu>
+        
+        <!-- 결과창 -->
+        <Grid DockPanel.Dock="Top" Height="100" Background="WhiteSmoke">
+            <TextBox FontSize="16" HorizontalAlignment="Right" Background="WhiteSmoke" 
+                     Margin="15" BorderThickness="0" x:Name="txtExp"></TextBox>
+            <TextBox FontSize="36" HorizontalAlignment="Right" Background="WhiteSmoke" FontWeight="Bold" 
+                     VerticalAlignment="Bottom" Margin="15" BorderThickness="0" x:Name="txtResult">0</TextBox>
+        </Grid>
+        
+        <!-- 메모리 -->
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Background="WhiteSmoke" FontWeight="Bold" FontSize="14" BorderThickness="0"
+                    x:Name="btn_MC" Click="btn_MC_Click" Height="28">MC</Button>
+            <Button Grid.Column="1" Background="WhiteSmoke" FontWeight="Bold" FontSize="14" BorderThickness="0"
+                    x:Name="btn_MR" Click="btn_MR_Click">MR</Button>
+            <Button Grid.Column="2" Background="WhiteSmoke" FontWeight="Bold" FontSize="14" BorderThickness="0"
+                    x:Name="btn_MPlus" Click="btn_MPlus_Click">M+</Button>
+            <Button Grid.Column="3" Background="WhiteSmoke" FontWeight="Bold" FontSize="14" BorderThickness="0"
+                    x:Name="btn_MMinus" Click="btn_MMinus_Click">M-</Button>
+            <Button Grid.Column="4" Background="WhiteSmoke" FontWeight="Bold" FontSize="14" BorderThickness="0"
+                    x:Name="btn_MS" Click="btn_MS_Click">MS</Button>
+        </Grid>
+        
+        <!-- 숫자키 -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!-- 첫째 줄 -->
+            <Button Grid.Column="0" FontSize="19" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnPercent" Click="btnPercent_Click" Background="LightPink">%
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" FontSize="17" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnCE" Click="btnCE_Click" Background="LightPink">CE
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" FontSize="17" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnC" Click="btnC_Click" Background="LightPink">C
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" FontSize="17" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnDelete" Click="btnDelete_Click" Background="LightPink">⌫
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- 둘째 줄 -->
+            <Button Grid.Column="0" Grid.Row="1" FontSize="17" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnRecip" Click="btnRecip_Click" Background="LightPink">1/x
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="1" FontSize="19" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnSqr" Click="btnSqr_Click" Background="LightPink">x²
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="1" FontSize="19" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnSqrt" Click="btnSqrt_Click" Background="LightPink">√
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="1" FontSize="22" BorderThickness="0" Margin="2, 1, 1, 1"
+                    x:Name="btnDivide" Click="Op_Click" Background="LightPink">÷
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- 셋째 줄 -->
+            <Button Grid.Column="0" Grid.Row="2" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="DemiBold">7
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="2" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">8
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="2" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">9
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="2" FontSize="22" BorderThickness="0"
+                    Margin="2, 1, 1, 1" Click="Op_Click" Background="MistyRose">x
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- 넷째 줄 -->
+            <Button Grid.Column="0" Grid.Row="3" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">4
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="3" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">5
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="3" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">6
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="3" FontSize="33" BorderThickness="0"
+                    Margin="2, 1, 1, 1" Click="Op_Click" Background="MistyRose">-
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- 다섯째 줄 -->
+            <Button Grid.Column="0" Grid.Row="4" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">1
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="4" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">2
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="4" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">3
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="4" FontSize="22" BorderThickness="0"
+                    Margin="2, 1, 1, 1" Click="Op_Click" Background="MistyRose">+
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- 여섯째 줄 -->
+            <Button Grid.Column="0" Grid.Row="5" FontSize="22" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" x:Name="btnPlusMinus" Click="btnPlusMinus_Click">±
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="5" FontSize="19" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" Click="btn_Click" FontWeight="Bold">0
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="5" FontSize="22" BorderThickness="0" Background="WhiteSmoke"
+                    Margin="2, 1, 1, 1" x:Name="btnDot" Click="btnDot_Click">.
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="5" FontSize="22" BorderThickness="0"
+                    Margin="2, 1, 1, 1" x:Name="btnEqual" Click="btnEqual_Click" Background="MistyRose">=
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+        </Grid>
+
+    </DockPanel>
+</Window>
